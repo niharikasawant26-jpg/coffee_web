@@ -1,3 +1,25 @@
+<?php
+include 'connect.php';
+
+
+
+  if (isset($_POST['submit'])) {
+      $name = $_POST['name'];
+      $email = $_POST['email'];
+      $message = $_POST['message'];
+
+      $sql = "INSERT INTO contacts (c_name, emails, msg) VALUES ('$name', '$email', '$message')";
+
+      if ($conn->query($sql) === TRUE) {
+          echo "<script>alert('Message sent successfully!');</script>";
+      } else {
+          echo "Error: " . $sql . "<br>" . $conn->error;
+      }
+  }
+
+  $conn->close();
+ 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +37,7 @@
     <header>
         <nav class="navbar section-content">
             <a href="#" class="nav-logo">
-                <h2 class="logo-text">☕Coffee</h2>
+                <h2 class="logo-text">☕HotBeans</h2>
             </a>
             <ul class="nav-menu">
                 <button id="menu-close-button" class="fas fa-times"></button>
@@ -253,12 +275,12 @@
                     </li>
                 </ul>
 
-                <form action="#" class="contact-form">
-                    <input type="text"placeholder="Your name" class="form-input" required>
-                     <input type="email" placeholder="Your email" class="form-input" required>
-                     <textarea  placeholder="Your message" class="form-input" required></textarea>
-                     <button class="submit-button">Submit</button>
-                </form>
+                  <form action="" method="POST" class="contact-form">
+      <input type="text" name="name" placeholder="Your name" class="form-input" required>
+      <input type="email" name="email" placeholder="Your email" class="form-input" required>
+      <textarea name="message" placeholder="Your message" class="form-input" required></textarea>
+      <button type="submit" name="submit" class="submit-button">Submit</button>
+  </form>
             </div>
         </section>
         
